@@ -1,0 +1,5 @@
+name=Playdate Template C
+author=Piotr Sadkowski
+description=Template in C API
+bundleID=com.panic.template
+imagePath=
