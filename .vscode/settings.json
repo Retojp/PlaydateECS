@@ -3,6 +3,7 @@
         "pd_api.h": "c",
         "pd_api_lua.h": "c",
         "pd_api_sound.h": "c",
-        "pd_api_display.h": "c"
+        "pd_api_display.h": "c",
+        "app.h": "c"
     }
 }
