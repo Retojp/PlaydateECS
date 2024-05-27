@@ -7,12 +7,12 @@ int Update(void* userdata)
 
 	int x = LCD_COLUMNS/2;
 	int y = LCD_ROWS/2;
-	char HWString[] = "Hello World";
+	char HWString[] = "Hello World\0";
 
 	pd->graphics->clear(kColorWhite);
 	pd->graphics->drawText(HWString, strlen(HWString), kASCIIEncoding, x, y);
 
 	pd->system->drawFPS(0,0);
 
-	return 1;
+	return 0;
 }
