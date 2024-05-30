@@ -1,18 +1,14 @@
 #include"pd_api.h"
 #include"app.h"
+#include"States/states.h"
+
+StateManager *AppStateManager;
 
 int Update(void* userdata)
 {
-	PlaydateAPI* pd = userdata;
+	usr = userdata;
 
-	int x = LCD_COLUMNS/2;
-	int y = LCD_ROWS/2;
-	char HWString[] = "Hello World\0";
+	AppStateManager->current->draw(1);
 
-	pd->graphics->clear(kColorWhite);
-	pd->graphics->drawText(HWString, strlen(HWString), kASCIIEncoding, x, y);
-
-	pd->system->drawFPS(0,0);
-
-	return 0;
+	return 1;
 }

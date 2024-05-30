@@ -22,7 +22,8 @@ VPATH += src
 
 # List C source files here
 SRC = src/main.c \
-src/app.c
+src/app.c \
+src/States/states.c
 
 # List all user directories here
 UINCDIR = 
