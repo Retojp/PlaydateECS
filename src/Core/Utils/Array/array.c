@@ -1,5 +1,5 @@
 #include "array.h"
-#include <string.h>
+#include "pd_api.h"
 #include <stdlib.h>
 
 typedef struct {
@@ -33,19 +33,19 @@ void* ArrayGetElementAt(const Array *array, int index){
     return _array->data + index * _array->elementSize;
 }
 
-void AddElement(Array* array, const void* element)
+void ArrayAddElement(Array* array, const void* element)
 {
     ArrayImpl *_array = (ArrayImpl*)array;
     int oldSize = _array->size;
     int newSize = oldSize + 1;
     if(newSize > _array->capacity){
         void* (*realloc)(void*,size_t) = _array->realloc;
-        _array = realloc(_array,newSize*_array->elementSize);
+        _array->data = realloc(_array->data,newSize*_array->elementSize);
         _array->capacity = newSize;
     }
     void* data = _array->data;
     memcpy(data + oldSize * _array->elementSize, element, _array->elementSize);
-    _array->size = newSize;
+    _array->size = newSize; 
 }
 
 void ArrayClean(Array *array){
