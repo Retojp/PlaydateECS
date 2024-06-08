@@ -1,14 +1,19 @@
 #include"pd_api.h"
 #include"app.h"
-#include"States/states.h"
 
-StateManager *AppStateManager;
+Application* CreateApplication(PlaydateAPI *pd){
+	void* (*realloc)(void *, size_t) = pd->system->realloc;
+	Application *application = realloc(0,sizeof(Application));
+	application->playdateApi = pd;
+	return application;
+}
 
-int Update(void* userdata)
-{
-	usr = userdata;
-
-	AppStateManager->current->draw(1);
-
+void SetupApplication(Application *application){
+	application->playdateApi->system->logToConsole("Application Setup\0");
+}
+int UpdateApplication(Application *application){
 	return 1;
+}
+void DestroyApplication(Application *application){
+	free(application);
 }

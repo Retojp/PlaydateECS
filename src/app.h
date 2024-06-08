@@ -1,11 +1,14 @@
 #ifndef app_h
 #define app_h
-#include "States/states.h"
 #include "pd_api.h"
 
-extern StateManager *AppStateManager;
-extern PlaydateAPI *usr;
+typedef struct Application{
+    PlaydateAPI *playdateApi;
+} Application;
 
-int Update(void* userdata);
+Application* CreateApplication(PlaydateAPI *playdateApi);
+void SetupApplication(Application *application);
+int UpdateApplication(Application *application);
+void DestroyApplication(Application *application);
 
 #endif /*app_h*/
