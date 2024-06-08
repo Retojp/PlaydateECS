@@ -11,9 +11,11 @@ Application* CreateApplication(PlaydateAPI *pd){
 void SetupApplication(Application *application){
 	application->playdateApi->system->logToConsole("Application Setup\0");
 }
+
 int UpdateApplication(Application *application){
 	return 1;
 }
+
 void DestroyApplication(Application *application){
 	free(application);
 }

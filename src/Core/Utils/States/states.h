@@ -3,7 +3,7 @@
 
 #include<stdlib.h>
 
-typedef int (*fnPtr)();
+typedef int (*fnPtr)(void);
 typedef int (*fnPtrFloat)(float);
 
 typedef struct
