@@ -17,5 +17,6 @@ int UpdateApplication(Application *application){
 }
 
 void DestroyApplication(Application *application){
-	free(application);
+	void* (*realloc)(void *, size_t) = application->playdateApi->system->realloc;
+	realloc(application,0);
 }
