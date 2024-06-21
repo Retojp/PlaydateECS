@@ -5,7 +5,7 @@
       "name": "Debug Playdate C",
       "type": "cppdbg",
       "request": "launch",
-      "program": "/home/awruk/playdate/bin/PlaydateSimulator",
+      "program": "${env:PLAYDATE_SDK_PATH}/bin/PlaydateSimulator",
       "args": ["PlaydateTemplate.pdx"],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
