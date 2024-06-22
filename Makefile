@@ -24,7 +24,9 @@ VPATH += src
 SRC = src/main.c \
 src/Core/app.c \
 src/Core/Utils/States/states.c \
-src/Core/Utils/Array/array.c
+src/Core/Utils/Array/array.c \
+src/Core/Ecs/ecsComponent.c \
+src/Core/Ecs/ecsEntity.c
 
 # List all user directories here
 UINCDIR = 
