@@ -2,17 +2,17 @@
 #define ecsComponent_h
 
 #include <stdlib.h>
-
-typedef int (*fnPtr)(void);
-typedef int (*fnPtrFloat)(float);
+#include "src/Core/Utils/functionTypes.h"
 
 typedef struct{
-    fnPtr Initialize;
-    fnPtrFloat Update;
+    fnPtrVoid Initialize;
+    fnPtrVoid Destroy;
+    fnPtrVoidFloat Update;
     void* (*realloc)(void*,size_t);
+    void* data;
 } Component;
 
-Component* ComponentCreate(void* (*realloc)(void*,size_t), fnPtr initialize, fnPtrFloat update);
+Component* ComponentCreate(void* (*realloc)(void*,size_t), fnPtrVoid initialize, fnPtrVoidFloat update, fnPtrVoid destroy, void* data);
 void ComponentDestroy(Component* component);
 
 #endif

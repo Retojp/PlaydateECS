@@ -2,9 +2,7 @@
 #define states_h
 
 #include<stdlib.h>
-
-typedef int (*fnPtr)(void);
-typedef int (*fnPtrFloat)(float);
+#include "src/Core/Utils/functionTypes.h"
 
 typedef struct
 {

@@ -27,7 +27,7 @@ void EntityInitialize(Entity* entity)
     int i;
     for(i=0; i<componentsCount; i++){
         Component *component = (Component*)ArrayGetElementAt(_entity->components,i);
-        component->Initialize();
+        component->Initialize(component->data);
     }
 }
 
@@ -37,7 +37,7 @@ void EntityUpdate(Entity* entity, float deltatime){
     int i;
     for(i=0; i<componentsCount; i++){
         Component *component = (Component*)ArrayGetElementAt(_entity->components,i);
-        component->Update(deltatime);
+        component->Update(component->data,deltatime);
     }
 }
 
@@ -49,6 +49,7 @@ void EntityDestroy(Entity* entity){
     {
         Component *component = (Component*)ArrayGetElementAt(_entity->components,i);
         ComponentDestroy(component);
+        component = NULL;
     }
     ArrayDestroy(_entity->components);
     _entity->realloc(_entity,0);

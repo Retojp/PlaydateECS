@@ -26,7 +26,9 @@ src/Core/app.c \
 src/Core/Utils/States/states.c \
 src/Core/Utils/Array/array.c \
 src/Core/Ecs/ecsComponent.c \
-src/Core/Ecs/ecsEntity.c
+src/Core/Ecs/ecsEntity.c \
+src/Components/Draw/draw.c \
+src/Components/Position/position.c
 
 # List all user directories here
 UINCDIR = 
