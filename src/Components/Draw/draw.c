@@ -1,5 +1,5 @@
 #include "draw.h"
-
+#include <stdlib.h>
 
 //TODO: its proof of concept and should be more focudes on sprites to be viable as draw component
 static void Initialize(void* draw){
@@ -23,6 +23,8 @@ Component *DrawCreate(void* (*realloc)(void*,size_t),Position* position, Playdat
     _draw->realloc = realloc;
     _draw->playdateAPI=pdAPI;
     _draw->position=position;
-    Component *drawComponent = ComponentCreate(realloc,Initialize,Update,Destroy,_draw);
+    char* name = realloc(0,sizeof("Draw"));
+    strcpy(name,"Draw");
+    Component *drawComponent = ComponentCreate(realloc,name,Initialize,Update,Destroy,_draw);
     return drawComponent;
 }

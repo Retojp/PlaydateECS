@@ -3,8 +3,10 @@
 
 #include <stdlib.h>
 #include "src/Core/Utils/functionTypes.h"
+#include <string.h>
 
 typedef struct{
+    char* name;
     fnPtrVoid Initialize;
     fnPtrVoid Destroy;
     fnPtrVoidFloat Update;
@@ -12,7 +14,7 @@ typedef struct{
     void* data;
 } Component;
 
-Component* ComponentCreate(void* (*realloc)(void*,size_t), fnPtrVoid initialize, fnPtrVoidFloat update, fnPtrVoid destroy, void* data);
+Component* ComponentCreate(void* (*realloc)(void*,size_t), char* name, fnPtrVoid initialize, fnPtrVoidFloat update, fnPtrVoid destroy, void* data);
 void ComponentDestroy(Component* component);
 
 #endif

@@ -20,6 +20,8 @@ Component *PositionCreate(void *(*realloc)(void *, size_t),int x,int y)
     _position->realloc = realloc;
     _position->x = x;
     _position->y = y;
-    Component* positionComponent = ComponentCreate(realloc,Initialize,Update,Destroy,_position);
+    char* name = realloc(0,sizeof("Position"));
+    strcpy(name,"Position");
+    Component* positionComponent = ComponentCreate(realloc,name,Initialize,Update,Destroy,_position);
     return positionComponent;
 }

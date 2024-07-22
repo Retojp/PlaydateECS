@@ -54,3 +54,16 @@ void EntityDestroy(Entity* entity){
     ArrayDestroy(_entity->components);
     _entity->realloc(_entity,0);
 }
+
+Component* EntityGetComponent(Entity *entity, char *name)
+{
+    EntityImpl *_entity = (EntityImpl*)entity;
+    int componentsCount = ArrayGetSize(_entity->components);
+    int i;
+    for(i=0; i<componentsCount; i++){
+        Component *component = (Component*)ArrayGetElementAt(_entity->components,i);
+        if(strcmp(component->name,name) == 0)
+            return component;
+    }
+    return NULL;
+}

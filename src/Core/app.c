@@ -25,7 +25,16 @@ void SetupApplication(Application *application){
 }
 
 int UpdateApplication(Application *application){
-	EntityUpdate(entity,1);
+	
+	Position* position = (Position*)EntityGetComponent(entity,"Position")->data;
+	float deltaTime = application->playdateApi->system->getElapsedTime();
+	position->x = 50 + (20 * sin(deltaTime));
+	position->y = 50 + (20 * cos(deltaTime));
+
+	application->playdateApi->system->logToConsole("%d", position->x);
+
+	application->playdateApi->graphics->clear(kColorWhite);
+	EntityUpdate(entity,0); 
 	return 1;
 }
 

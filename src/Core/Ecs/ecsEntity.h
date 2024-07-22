@@ -10,5 +10,6 @@ void EntityAddComponent(Entity* entity, Component* component);
 void EntityInitialize(Entity* entity);
 void EntityUpdate(Entity* entity, float deltatime);
 void EntityDestroy(Entity* entity);
+Component* EntityGetComponent(Entity* entity, char* name);
 
 #endif
