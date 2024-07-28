@@ -1,6 +1,7 @@
 #ifndef ecsEntity_h
 #define ecsEntity_h
 
+#include "ecsComponent.h"
 #include <stdlib.h>
 
 typedef struct Entity Entity;
@@ -10,6 +11,7 @@ void EntityAddComponent(Entity* entity, Component* component);
 void EntityInitialize(Entity* entity);
 void EntityUpdate(Entity* entity, float deltatime);
 void EntityDestroy(Entity* entity);
+int EntityGetSize(void);
 Component* EntityGetComponent(Entity* entity, char* name);
 
 #endif

@@ -55,6 +55,10 @@ void EntityDestroy(Entity* entity){
     _entity->realloc(_entity,0);
 }
 
+int EntityGetSize(void){
+    return sizeof(EntityImpl);
+}
+
 Component* EntityGetComponent(Entity *entity, char *name)
 {
     EntityImpl *_entity = (EntityImpl*)entity;
