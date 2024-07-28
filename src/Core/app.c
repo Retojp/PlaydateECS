@@ -15,18 +15,24 @@ Application* CreateApplication(PlaydateAPI *pd){
 
 void SetupApplication(Application *application){
 	application->playdateApi->system->logToConsole("Application Setup\0");
-
+	srand(application->playdateApi->system->getCurrentTimeMilliseconds());
 	Scene* mainScene = SceneCreate(application->playdateApi->system->realloc);
 
-	Entity *entity;
-	entity=EntityCreate(application->playdateApi->system->realloc);
+	int ENTITY_COUNT = 200;
+	int i=0;
+	int HEIGHT = application->playdateApi->display->getHeight();
+	int WIDTH = application->playdateApi->display->getWidth();
+	for(i=0;i<ENTITY_COUNT;i++)
+	{
+		Entity *entity;
+		entity=EntityCreate(application->playdateApi->system->realloc);
 
-	Component* position = PositionCreate(application->playdateApi->system->realloc,50,50);
-	Component* draw = DrawCreate(application->playdateApi->system->realloc,position->data,application->playdateApi);
-	EntityAddComponent(entity ,position);
-	EntityAddComponent(entity, draw);
-
-	SceneAddEntity(mainScene,entity);
+		Component* position = PositionCreate(application->playdateApi->system->realloc,rand()%WIDTH,rand()%HEIGHT);
+		Component* draw = DrawCreate(application->playdateApi->system->realloc,position->data,application->playdateApi);
+		EntityAddComponent(entity ,position);
+		EntityAddComponent(entity, draw);
+		SceneAddEntity(mainScene,entity);
+	}
 
 	application->currentScene = mainScene;
 	SceneInitialize(application->currentScene);
