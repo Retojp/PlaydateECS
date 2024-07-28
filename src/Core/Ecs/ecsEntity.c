@@ -52,7 +52,6 @@ void EntityDestroy(Entity* entity){
         component = NULL;
     }
     ArrayDestroy(_entity->components);
-    _entity->realloc(_entity,0);
 }
 
 int EntityGetSize(void){

@@ -51,5 +51,6 @@ void SceneDestroy(Scene *scene)
         Entity* entity = ArrayGetElementAt(_scene->entities,i);
         EntityDestroy(entity);
     }
+    ArrayDestroy(_scene->entities);
     _scene = _scene->realloc(_scene,0);
 }
