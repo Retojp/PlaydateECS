@@ -1,14 +1,13 @@
 #include "draw.h"
 #include <stdlib.h>
 
-//TODO: its proof of concept and should be more focudes on sprites to be viable as draw component
 static void Initialize(void* draw){
     return;
 }
 
 static void Update(void* draw, float deltaTime){
     Draw* _draw = (Draw*)draw;
-    _draw->playdateAPI->graphics->drawRect(_draw->position->x,_draw->position->y,10,10,kColorBlack);
+    _draw->playdateAPI->graphics->drawRect(_draw->position->x,_draw->position->y,_draw->width,_draw->height,kColorBlack);
 }
 
 static void Destroy(void* draw){
@@ -17,9 +16,11 @@ static void Destroy(void* draw){
     _draw->realloc(draw,0);
 }
 
-Component *DrawCreate(void* (*realloc)(void*,size_t),Position* position, PlaydateAPI* pdAPI)
+Component *DrawCreate(void* (*realloc)(void*,size_t),Position* position,int width,int height, PlaydateAPI* pdAPI)
 {
     Draw* _draw = realloc(0,sizeof(Draw));
+    _draw->width=width;
+    _draw->height=height;
     _draw->realloc = realloc;
     _draw->playdateAPI=pdAPI;
     _draw->position=position;

@@ -29,7 +29,11 @@ src/Core/Ecs/ecsComponent.c \
 src/Core/Ecs/ecsEntity.c \
 src/Core/Scene/scene.c \
 src/Components/Draw/draw.c \
-src/Components/Position/position.c
+src/Components/Position/position.c \
+src/Components/BallMover/ballMover.c \
+src/Components/PlayerController/playerController.c \
+src/Components/AiController/aiController.c \
+src/Components/Collision/boxCollider.c
 
 # List all user directories here
 UINCDIR = 

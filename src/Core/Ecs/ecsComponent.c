@@ -17,5 +17,4 @@ void ComponentDestroy(Component* component)
     component->Destroy(component->data);
     component->name = realloc(component->name,0);
     component->data=NULL;
-
 }

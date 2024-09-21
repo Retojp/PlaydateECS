@@ -1,5 +1,5 @@
-#ifndef draw_h
-#define draw_h
+#ifndef player_controller_h
+#define player_controller_h
 #include "src/Core/Ecs/ecsComponent.h"
 #include "src/Core/Utils/functionTypes.h"
 #include "src/Components/Position/position.h"
@@ -8,12 +8,9 @@
 typedef struct {
     void* (*realloc)(void*, size_t);
     Position* position;
-    int width;
-    int height;
     PlaydateAPI* playdateAPI;
-} Draw;
+} PlayerController;
 
-Component* DrawCreate(void* (*realloc)(void*,size_t),Position* position,int width,int height, PlaydateAPI *pdAPI);
-void DrawDestroy(Draw* position);
+Component* PlayerControllerCreate(void* (*realloc)(void*,size_t),Position* position, PlaydateAPI *pdAPI);
 
 #endif

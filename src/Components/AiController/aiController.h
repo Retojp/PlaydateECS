@@ -1,5 +1,5 @@
-#ifndef draw_h
-#define draw_h
+#ifndef ai_controller_h
+#define ai_controller_h
 #include "src/Core/Ecs/ecsComponent.h"
 #include "src/Core/Utils/functionTypes.h"
 #include "src/Components/Position/position.h"
@@ -8,12 +8,11 @@
 typedef struct {
     void* (*realloc)(void*, size_t);
     Position* position;
-    int width;
-    int height;
+    Position* ballPosition;
+    float speed;
     PlaydateAPI* playdateAPI;
-} Draw;
+} AiController;
 
-Component* DrawCreate(void* (*realloc)(void*,size_t),Position* position,int width,int height, PlaydateAPI *pdAPI);
-void DrawDestroy(Draw* position);
+Component* AiControllerCreate(void* (*realloc)(void*,size_t),Position* position, Position* ballPosition, PlaydateAPI *pdAPI);
 
 #endif
