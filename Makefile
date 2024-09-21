@@ -25,11 +25,7 @@ SRC = src/main.c \
 src/Core/app.c \
 src/Core/Utils/States/states.c \
 src/Core/Utils/Array/array.c \
-src/Core/Ecs/ecsComponent.c \
-src/Core/Ecs/ecsEntity.c \
-src/Core/Scene/scene.c \
-src/Components/Draw/draw.c \
-src/Components/Position/position.c
+src/Core/Utils/SparseSet/SparseSet.c
 
 # List all user directories here
 UINCDIR = 
