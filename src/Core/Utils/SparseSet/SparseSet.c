@@ -77,6 +77,15 @@ void SparseSetRemove(SparseSet *sparseSet, int elementIndex)
     _sparseSet->sparse[_sparseSet->GetElementIndex(lastItem)] = dense_index;
 }
 
+void* SparseSetGetElement(SparseSet *sparseSet, int elementIndex)
+{
+    SparseSetImpl* _sparseSet = (SparseSetImpl*)sparseSet;
+    if(!SparseSetContains(sparseSet,elementIndex))
+        return NULL;
+    
+    return ArrayGetElementAt(_sparseSet->dense,_sparseSet->sparse[elementIndex]);
+}
+
 void SparseSetIterate(SparseSet *sparseSet, void (*iterateFunc)(void*,void*), void* userdata)
 {
     SparseSetImpl* _sparseSet = (SparseSetImpl*)sparseSet;

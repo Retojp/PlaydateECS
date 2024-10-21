@@ -2,14 +2,52 @@
 #include"app.h"
 #include"src/Core/Utils/SparseSet/SparseSet.h"
 
+typedef struct testS{
+	int id;
+	char string[5];
+}testS;
+
+int getIndex(void* element){
+	testS* _testS = (testS*)element;
+	return _testS->id;
+}
+
+void iterate(void* element,void* userdata){
+	testS* _testS = (testS*)element;
+	PlaydateAPI* pdApi = (PlaydateAPI*)userdata;
+	pdApi->system->logToConsole(_testS->string);
+}
+
+void setElement(Array* array, int id, void* element){
+	testS* _testS = ArrayGetElementAt(array,id);
+	memcpy(_testS,element,sizeof(testS));
+}
+
 Application* CreateApplication(PlaydateAPI *pd){
 	void* (*realloc)(void *, size_t) = pd->system->realloc;
 	Application *application = realloc(0,sizeof(Application));
 	application->playdateApi = pd;
+	application->ecs=EcsCreate(pd->system->realloc);
 	return application;
 }
 
 void SetupApplication(Application *application){
+	testS test1 = {.id=2,.string="dupa\0"};
+	testS test2 = {.id=4,.string="dup2\0"};
+	testS test3 = {.id=1,.string="dup3\0"};
+	testS test4 = {.id=4,.string="dup4\0"};
+
+	int testSId = EcsRegisterComponent(application->ecs, sizeof(testS),getIndex,setElement);
+	
+	EcsAddComponentTo(application->ecs,testSId,&test1);
+	EcsAddComponentTo(application->ecs,testSId,&test2);
+
+	testS *retrieved = EcsGetComponent(application->ecs,2,testSId);
+	retrieved = EcsGetComponent(application->ecs,4,testSId);
+
+	application->playdateApi->system->logToConsole(retrieved->string);
+
+	// SparseSetIterate(ecs,iterate,application->playdateApi);
 	return;
 }
 
@@ -23,4 +61,5 @@ int UpdateApplication(Application *application){
 void DestroyApplication(Application *application){
 	void* (*realloc)(void *, size_t) = application->playdateApi->system->realloc;
 	realloc(application,0);
+	return;
 }

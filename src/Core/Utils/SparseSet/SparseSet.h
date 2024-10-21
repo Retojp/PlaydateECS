@@ -19,6 +19,7 @@ SparseSet *SparseSetCreate(
 void SparseSetAdd(SparseSet* sparseSet, void* element);
 bool SparseSetContains(SparseSet* sparseSet, int elementIndex);
 void SparseSetRemove(SparseSet *sparseSet, int elementIndex);
+void* SparseSetGetElement(SparseSet *sparseSet, int elementIndex);
 void SparseSetIterate(SparseSet *sparseSet, void (*iterateFunc)(void*,void*), void* userdata);
 
 #endif
