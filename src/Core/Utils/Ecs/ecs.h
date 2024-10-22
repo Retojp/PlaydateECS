@@ -6,11 +6,17 @@
 #define MAX_COMPONENTS 64
 #define MAX_ENTITIES 100
 
+typedef void* componentPtr;
+typedef void* userdataPtr;
+
 typedef struct Ecs Ecs;
 
 Ecs* EcsCreate(void* (*realloc)(void*,size_t));
 int EcsRegisterComponent(Ecs *ecs, size_t componentSize,fnSparseSetGetElementIndex GetIndex,fnSparseSetSetElementAt SetElement);
-int EcsAddComponentTo(Ecs* ecs, int componentType, void* component);
+void EcsAddComponentTo(Ecs* ecs, int componentType, componentPtr component);
+void EcsRemoveComponentFrom(Ecs* ecs, int componentType, int entityId);
+void EcsIterateOver(Ecs *ecs, int componentType, void (*iterateFunc)(componentPtr, userdataPtr),userdataPtr userdata);
 void* EcsGetComponent(Ecs* ecs, int entityId, int componentType);
+void EcsDestroy(Ecs* ecs);
 
 #endif

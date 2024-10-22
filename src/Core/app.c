@@ -31,6 +31,12 @@ Application* CreateApplication(PlaydateAPI *pd){
 	return application;
 }
 
+void testSIIterate1(componentPtr component, userdataPtr userdata){
+	PlaydateAPI* pdApi = (PlaydateAPI*)userdata;
+	testS* _tests = (testS*)component;
+	pdApi->system->logToConsole(_tests->string);
+}
+
 void SetupApplication(Application *application){
 	testS test1 = {.id=2,.string="dupa\0"};
 	testS test2 = {.id=4,.string="dup2\0"};
@@ -40,13 +46,19 @@ void SetupApplication(Application *application){
 	int testSId = EcsRegisterComponent(application->ecs, sizeof(testS),getIndex,setElement);
 	
 	EcsAddComponentTo(application->ecs,testSId,&test1);
+	EcsAddComponentTo(application->ecs,testSId,&test4);
 	EcsAddComponentTo(application->ecs,testSId,&test2);
+	EcsAddComponentTo(application->ecs,testSId,&test3);
+	EcsRemoveComponentFrom(application->ecs,testSId,2);
+	EcsRemoveComponentFrom(application->ecs,testSId,2);
 
 	testS *retrieved = EcsGetComponent(application->ecs,2,testSId);
 	retrieved = EcsGetComponent(application->ecs,4,testSId);
 
 	application->playdateApi->system->logToConsole(retrieved->string);
+	application->playdateApi->system->logToConsole("------");
 
+	EcsIterateOver(application->ecs,testSId,testSIIterate1,application->playdateApi);
 	// SparseSetIterate(ecs,iterate,application->playdateApi);
 	return;
 }
@@ -59,6 +71,7 @@ int UpdateApplication(Application *application){
 }
 
 void DestroyApplication(Application *application){
+	EcsDestroy(application->ecs);
 	void* (*realloc)(void *, size_t) = application->playdateApi->system->realloc;
 	realloc(application,0);
 	return;
