@@ -22,11 +22,13 @@ VPATH += src
 
 # List C source files here
 SRC = src/main.c \
+src/Core/initialize.c \
 src/Core/app.c \
 src/Core/Utils/States/states.c \
 src/Core/Utils/Array/array.c \
 src/Core/Utils/SparseSet/SparseSet.c \
 src/Core/Utils/Ecs/ecs.c
+
 
 # List all user directories here
 UINCDIR = 

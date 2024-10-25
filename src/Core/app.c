@@ -10,17 +10,6 @@ Application* CreateApplication(PlaydateAPI *pd){
 	return application;
 }
 
-void SetupApplication(Application *application){
-	return;
-}
-
-int UpdateApplication(Application *application){
-	application->playdateApi->graphics->clear(kColorWhite);
-	application->playdateApi->system->drawFPS(0,0);
-	application->playdateApi->system->resetElapsedTime();
-	return 1;
-}
-
 void DestroyApplication(Application *application){
 	EcsDestroy(application->ecs);
 	void* (*realloc)(void *, size_t) = application->playdateApi->system->realloc;
