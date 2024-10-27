@@ -3,22 +3,13 @@
 
 #include <stdlib.h>
 #include <stdbool.h>
-#include "src/Core/Utils/Array/array.h"
 
 typedef struct SparseSet SparseSet;
-typedef int (*fnSparseSetGetElementIndex)(void*);
-typedef void (*fnSparseSetSetElementAt)(Array*, int, void*);
 
-SparseSet *SparseSetCreate(
-    void* (*realloc)(void *, size_t),
-    size_t elementSize,
-    int maxSize,
-    fnSparseSetGetElementIndex GetElementIndex,
-    fnSparseSetSetElementAt SetElementAt
-  );
-void SparseSetAdd(SparseSet* sparseSet, void* element);
-bool SparseSetContains(SparseSet* sparseSet, int elementIndex);
-void SparseSetRemove(SparseSet *sparseSet, int elementIndex);
+SparseSet *SparseSetCreate(void* (*realloc)(void *, size_t), int maxSize, size_t elementSize);
+void SparseSetAdd(SparseSet* sparseSet, int element, void* data);
+bool SparseSetContains(SparseSet* sparseSet, int element);
+void SparseSetRemove(SparseSet* sparseSet, int element);
 void* SparseSetGetElement(SparseSet *sparseSet, int elementIndex);
 void SparseSetIterate(SparseSet *sparseSet, void (*iterateFunc)(void*,void*), void* userdata);
 

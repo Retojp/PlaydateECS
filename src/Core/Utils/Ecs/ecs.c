@@ -21,22 +21,22 @@ void *EcsGetComponent(Ecs *ecs, int entityId, int componentType)
     return SparseSetGetElement(_ecs->components[componentType],entityId);
 }
 
-int EcsRegisterComponent(Ecs *ecs, size_t componentSize,fnSparseSetGetElementIndex GetIndex,fnSparseSetSetElementAt SetElement)
+int EcsRegisterComponent(Ecs *ecs, size_t componentSize)
 {
     EcsImpl* _ecs = (EcsImpl*)ecs;
     if(_ecs->registered_count>=MAX_COMPONENTS)
         return -1;
 
-    _ecs->components[_ecs->registered_count] = SparseSetCreate(_ecs->realloc,componentSize,MAX_ENTITIES,GetIndex,SetElement);
+    _ecs->components[_ecs->registered_count] = SparseSetCreate(_ecs->realloc,componentSize,MAX_ENTITIES);
     return _ecs->registered_count++;
 }
 
-void EcsAddComponentTo(Ecs *ecs, int componentType, componentPtr component)
+void EcsAddComponentTo(Ecs *ecs, int componentType, int entityId, componentPtr component)
 {
     EcsImpl* _ecs = (EcsImpl*)ecs;
     if(_ecs->registered_count<=componentType)
         return;
-    SparseSetAdd(_ecs->components[componentType],component);
+    SparseSetAdd(_ecs->components[componentType], entityId, component);
     return;
 }
 
