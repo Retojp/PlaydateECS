@@ -14,7 +14,7 @@ Ecs *EcsCreate(void *(*realloc)(void *, size_t))
     return (Ecs*)_ecs;
 }
 
-void *EcsGetComponent(Ecs *ecs, int entityId, int componentType)
+void *EcsGetComponent(Ecs *ecs, int componentType, int entityId)
 {
     EcsImpl* _ecs = (EcsImpl*)ecs;
 
@@ -27,7 +27,7 @@ int EcsRegisterComponent(Ecs *ecs, size_t componentSize)
     if(_ecs->registered_count>=MAX_COMPONENTS)
         return -1;
 
-    _ecs->components[_ecs->registered_count] = SparseSetCreate(_ecs->realloc,componentSize,MAX_ENTITIES);
+    _ecs->components[_ecs->registered_count] = SparseSetCreate(_ecs->realloc,MAX_ENTITIES,componentSize);
     return _ecs->registered_count++;
 }
 
@@ -48,7 +48,7 @@ void EcsRemoveComponentFrom(Ecs *ecs, int componentType, int entityId)
     SparseSetRemove(_ecs->components[componentType],entityId);
 }
 
-void EcsIterateOver(Ecs *ecs, int componentType, void (*iterateFunc)(componentPtr, userdataPtr),userdataPtr userdata)
+void EcsIterateOver(Ecs *ecs, int componentType, void (*iterateFunc)(componentPtr, int, userdataPtr),userdataPtr userdata)
 {
     EcsImpl* _ecs = (EcsImpl*)ecs;
     if(_ecs->registered_count<=componentType)

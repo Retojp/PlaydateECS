@@ -81,14 +81,14 @@ void* SparseSetGetElement(SparseSet *sparseSet, int elementIndex){
     return ArrayGetElementAt(_sparseSet->data,elementIndex);
 }
 
-void SparseSetIterate(SparseSet *sparseSet, void (*iterateFunc)(void*,void*), void* userdata)
+void SparseSetIterate(SparseSet *sparseSet, void (*iterateFunc)(void*, int ,void*), void* userdata)
 {
     SparseSetImpl* _sparseSet = (SparseSetImpl*)sparseSet;
     int i = 0;
 
     for(i=0;i<_sparseSet->n;i++)
     {
-        iterateFunc(ArrayGetElementAt(_sparseSet->data,i), userdata);
+        iterateFunc(ArrayGetElementAt(_sparseSet->data,i), _sparseSet->dense[i], userdata);
     }
 }
 
