@@ -18,7 +18,7 @@ SparseSet *SparseSetCreate(void* (*realloc)(void *, size_t), int maxSize, size_t
     SparseSetImpl *_sparseSet = realloc(0,sizeof(SparseSetImpl));
     _sparseSet->realloc = realloc;
     _sparseSet->n=0;
-    size_t maxArraySize = maxSize*sizeof(int);
+    int maxArraySize = maxSize*sizeof(int);
     _sparseSet->sparse = realloc(0,maxArraySize);
     _sparseSet->dense = realloc(0,maxArraySize);
     _sparseSet->elementSize = elementSize;
