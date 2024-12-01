@@ -6,7 +6,7 @@
 
 typedef struct SparseSet SparseSet;
 
-SparseSet *SparseSetCreate(void* (*realloc)(void *, size_t), int maxSize, size_t elementSize);
+SparseSet *SparseSetCreate(void* (*realloc)(void *, size_t), int maxSize, int elementSize);
 void SparseSetAdd(SparseSet* sparseSet, int element, void* data);
 bool SparseSetContains(SparseSet* sparseSet, int element);
 void SparseSetRemove(SparseSet* sparseSet, int element);

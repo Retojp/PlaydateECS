@@ -13,7 +13,7 @@ typedef struct SparseSetImpl
     int maxId;
 } SparseSetImpl;
 
-SparseSet *SparseSetCreate(void* (*realloc)(void *, size_t), int maxSize, size_t elementSize)
+SparseSet *SparseSetCreate(void* (*realloc)(void *, size_t), int maxSize, int elementSize)
 {
     SparseSetImpl *_sparseSet = realloc(0,sizeof(SparseSetImpl));
     _sparseSet->realloc = realloc;
@@ -21,6 +21,12 @@ SparseSet *SparseSetCreate(void* (*realloc)(void *, size_t), int maxSize, size_t
     int maxArraySize = maxSize*sizeof(int);
     _sparseSet->sparse = realloc(0,maxArraySize);
     _sparseSet->dense = realloc(0,maxArraySize);
+    for (int i = 0; i < maxSize; i++)
+    {
+        _sparseSet->sparse[i] = -1;
+        _sparseSet->dense[i] = -1;
+    }
+    
     _sparseSet->elementSize = elementSize;
     _sparseSet->data = ArrayCreate(elementSize,realloc);
     _sparseSet->maxId = maxSize;
@@ -36,7 +42,7 @@ void SparseSetAdd(SparseSet* sparseSet, int element, void* data)
     _sparseSet->dense[_sparseSet->n] = element;
     _sparseSet->sparse[element] = _sparseSet->n;
     
-    size_t arraySize = ArrayGetSize(_sparseSet->data);
+    int arraySize = ArrayGetSize(_sparseSet->data);
 
     if(arraySize>_sparseSet->n){
         void* elementToOverride = ArrayGetElementAt(_sparseSet->data,_sparseSet->n);
@@ -56,6 +62,9 @@ bool SparseSetContains(SparseSet* sparseSet, int element)
         return false;
 
     int dense_index = _sparseSet->sparse[element];
+    if(dense_index<0) {
+        return false;
+    }
     return dense_index < _sparseSet->n && _sparseSet->dense[dense_index] == element;
 }
 
