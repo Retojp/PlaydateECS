@@ -87,7 +87,7 @@ void* SparseSetGetElement(SparseSet *sparseSet, int elementIndex){
     if(elementIndex >= _sparseSet->maxId || !SparseSetContains(sparseSet,elementIndex))
         return NULL;
 
-    return ArrayGetElementAt(_sparseSet->data,elementIndex);
+    return ArrayGetElementAt(_sparseSet->data,_sparseSet->sparse[elementIndex]);
 }
 
 void SparseSetIterate(SparseSet *sparseSet, void (*iterateFunc)(void*, int ,void*), void* userdata)
