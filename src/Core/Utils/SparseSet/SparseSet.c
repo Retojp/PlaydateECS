@@ -1,5 +1,5 @@
 #include "SparseSet.h"
-#include "src/Core/Utils/Array/array.h"
+#include "../Array/array.h"
 #include <string.h>
 
 typedef struct SparseSetImpl 

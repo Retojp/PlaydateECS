@@ -2,7 +2,7 @@
 #define states_h
 
 #include<stdlib.h>
-#include "src/Core/Utils/functionTypes.h"
+#include "../functionTypes.h"
 
 typedef struct
 {

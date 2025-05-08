@@ -1,6 +1,4 @@
 #include "array.h"
-#include "pd_api.h"
-#include <stdlib.h>
 
 typedef struct {
     int size;

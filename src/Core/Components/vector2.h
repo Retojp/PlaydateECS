@@ -1,10 +1,10 @@
 #ifndef vector2_h
 #define vector2_h
 
-typedef struct vector2
+typedef struct Vector2
 {
     int x;
     int y;
-}vector2;
+}Vector2;
 
 #endif

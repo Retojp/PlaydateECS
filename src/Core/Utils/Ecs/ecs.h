@@ -1,7 +1,7 @@
 #ifndef ecs_h
 #define ecs_h
 
-#include "src/Core/Utils/SparseSet/SparseSet.h"
+#include "../SparseSet/SparseSet.h"
 
 #define MAX_COMPONENTS 64
 #define MAX_ENTITIES 1000
